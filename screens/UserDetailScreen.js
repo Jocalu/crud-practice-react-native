@@ -1,9 +1,16 @@
 /* eslint-disable react/prop-types */
-import React, {useEffect} from 'react'
-import {View, Text} from 'react-native'
+import React, {useEffect, useState} from 'react'
+import { Button } from 'react-native'
+import {View, StyleSheet} from 'react-native'
+import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import firebase from '../database/firebase'
 
 const UserDetailScreen = (props) => {
+    const [state, setState] = useState({
+      name: '',
+      email: '',
+      phone: ''
+  })
 
   const getUserById = async(id) => {
     const dbRef = firebase.db.collection('users').doc(id)
@@ -14,6 +21,10 @@ const UserDetailScreen = (props) => {
   useEffect(()=>{
     getUserById(props.route.params.userId)
   })
+
+  const handleChangeText = (name, value) => {
+    setState({...state, [name]: value})
+  }
 
   return (
    <ScrollView style={styles.container}>
@@ -39,10 +50,35 @@ const UserDetailScreen = (props) => {
     </View>
 
     <View>
-      <Button title="Save User" onPress={() => saveNewUser()}></Button>
+      <Button 
+        color="#19AC52" 
+        title="Update User" 
+        onPress={() => alert('ok')} />
     </View>
-
+    <View> 
+      <Button 
+        color="#E37399" 
+        title="Delete User" 
+        onPress={() => alert('ok')} />
+    </View>
+     
   </ScrollView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    padding:35,
+  },
+  inputGroup: {
+    flex: 1,
+    padding:0,
+    marginBottom: 15,
+    borderBottomColor: '#cccccc',
+    borderBottomWidth: 1
+  }
+});
+
+
 export default UserDetailScreen
