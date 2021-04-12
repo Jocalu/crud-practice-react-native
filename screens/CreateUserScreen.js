@@ -25,7 +25,7 @@ const CreateUserScreen = (props) => {
         email: state.email,
         phone: state.phone,
       })
-      props.navigation.navigate('UserList')
+      props.navigation.navigate('UsersList')
       } catch (error){
         console.log(error)
       }
