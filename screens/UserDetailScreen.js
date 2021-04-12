@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, {useEffect, useState} from 'react'
 import { ActivityIndicator, Button } from 'react-native'
-import {View, StyleSheet} from 'react-native'
+import {View, StyleSheet, Alert} from 'react-native'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import firebase from '../database/firebase'
 
@@ -27,10 +27,22 @@ const UserDetailScreen = (props) => {
 
   useEffect(()=>{
     getUserById(props.route.params.userId)
-  })
+  }), ([])
 
   const handleChangeText = (name, value) => {
-    setState({...state, [name]: value})
+    setUser({...user, [name]: value})
+}
+
+const deleteUser = async() => {
+    const dbRef = firebase.db.collection('users').doc(props.route.params.userId)
+ await dbRef.delete();
+ props.navigation.navigate('UsersList')
+}
+
+const openConfirmationAlert = () => {
+Alert.alert('Remove The User', 'Are you sure?', [{text:'Yes', onPress: () => deleteUser()},
+{text:'No', onPress: () => console.log('false')}])
+}
 
     if (loading){
       return(
@@ -39,7 +51,7 @@ const UserDetailScreen = (props) => {
         </View>
       )
     }
-  }
+  
 
   return (
    <ScrollView style={styles.container}>
@@ -77,7 +89,7 @@ const UserDetailScreen = (props) => {
       <Button 
         color="#E37399" 
         title="Delete User" 
-        onPress={() => alert('ok')} />
+        onPress={() => openConfirmationAlert()} />
     </View>
      
   </ScrollView>
