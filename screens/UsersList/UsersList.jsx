@@ -1,11 +1,11 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ListItem, Avatar } from 'react-native-elements';
 import firebase from '../../database/firebase';
 
-const UsersList = (props) => {
+export default function UsersList(props) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -51,5 +51,10 @@ const UsersList = (props) => {
       ))}
     </ScrollView>
   );
+}
+
+UsersList.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
-export default UsersList;

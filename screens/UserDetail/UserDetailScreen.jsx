@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   ActivityIndicator, Button, View, Alert,
 } from 'react-native';
@@ -7,7 +7,7 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import firebase from '../../database/firebase';
 import styles from './stylesDetail';
 
-const UserDetailScreen = (props) => {
+export default function UserDetailScreen(props) {
   const initialState = {
     id: '',
     name: '',
@@ -110,6 +110,14 @@ const UserDetailScreen = (props) => {
 
     </ScrollView>
   );
+}
+UserDetailScreen.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      userId: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
-
-export default UserDetailScreen;

@@ -1,12 +1,12 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   View, Button, TextInput, ScrollView, Alert,
 } from 'react-native';
 import firebase from '../../database/firebase';
 import styles from './stylesCreateUser';
 
-const CreateUserScreen = (props) => {
+export default function CreateUserScreen(props) {
   const [state, setState] = useState({
     name: '',
     email: '',
@@ -63,6 +63,10 @@ const CreateUserScreen = (props) => {
 
     </ScrollView>
   );
-};
+}
 
-export default CreateUserScreen;
+CreateUserScreen.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
