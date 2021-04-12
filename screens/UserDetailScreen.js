@@ -6,12 +6,13 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import firebase from '../database/firebase'
 
 const UserDetailScreen = (props) => {
-    const [user, setUser] = useState({
+  const initialState = {
       id: '',
       name: '',
       email: '',
       phone: ''
-  })
+  }
+    const [user, setUser] = useState()
   const [loading, setLoading] = useState(true)
 
   const getUserById = async(id) => {
@@ -37,6 +38,18 @@ const deleteUser = async() => {
     const dbRef = firebase.db.collection('users').doc(props.route.params.userId)
  await dbRef.delete();
  props.navigation.navigate('UsersList')
+}
+
+const updateUser = async() => {
+    const dbRef = firebase.db.collection('users').doc(user.id)
+ await dbRef.set({
+   name: user.name,
+   email: user.email,
+   phone: user.phone
+ });
+setUser(initialState)
+ props.navigation.navigate('UsersList')
+
 }
 
 const openConfirmationAlert = () => {
@@ -83,7 +96,7 @@ Alert.alert('Remove The User', 'Are you sure?', [{text:'Yes', onPress: () => del
       <Button 
         color="#19AC52" 
         title="Update User" 
-        onPress={() => alert('ok')} />
+        onPress={() => updateUser()} />
     </View>
     <View> 
       <Button 
