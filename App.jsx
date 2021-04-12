@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import UsersList from './screens/UsersList';
-import CreateUserScreen from './screens/CreateUserScreen';
-import UserDetailScreen from './screens/UserDetailScreen';
+import UsersList from './screens/UsersList/UsersList';
+import CreateUserScreen from './screens/CreateUser/CreateUserScreen';
+import UserDetailScreen from './screens/UserDetail/UserDetailScreen';
 
 const Stack = createStackNavigator();
 

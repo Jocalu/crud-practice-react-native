@@ -1,16 +1,34 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, Button, TextInput, ScrollView, Alert,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+  Alert,
+  StyleSheet,
 } from 'react-native';
 import firebase from '../../database/firebase';
-import styles from './stylesCreateUser';
 
 export default function CreateUserScreen(props) {
   const [state, setState] = useState({
     name: '',
     email: '',
     phone: '',
+  });
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 35,
+    },
+    inputGroup: {
+      flex: 1,
+      padding: 0,
+      marginBottom: 15,
+      borderBottomColor: '#cccccc',
+      borderBottomWidth: 1,
+    },
   });
 
   const handleChangeText = (name, value) => {

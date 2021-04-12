@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  ActivityIndicator, Button, View, Alert,
+  ActivityIndicator,
+  Button,
+  View,
+  Alert,
+  StyleSheet,
 } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import firebase from '../../database/firebase';
-import styles from './stylesDetail';
 
 export default function UserDetailScreen(props) {
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 35,
+    },
+    inputGroup: {
+      flex: 1,
+      padding: 0,
+      marginBottom: 15,
+      borderBottomColor: '#cccccc',
+      borderBottomWidth: 1,
+    },
+  });
+
   const initialState = {
     id: '',
     name: '',
