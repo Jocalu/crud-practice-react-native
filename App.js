@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import UsersList from './screens/UsersList';
@@ -9,24 +8,25 @@ import UserDetailScreen from './screens/UserDetailScreen';
 
 const Stack = createStackNavigator()
 
-function myStack() {
+function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen component={UsersList}/>
-      <Stack.Screen component={CreateUserScreen}/>
-      <Stack.Screen component={UserDetailScreen}/>
+      <Stack.Screen name="UsersList" component={UsersList}/>
+      <Stack.Screen name="CreateUserScreen" component={CreateUserScreen}/>
+      <Stack.Screen name="UserDetailScreen" component={UserDetailScreen}/>
     </Stack.Navigator>
   )
 }
 
 export default function App() {
   return (
-<NavigationContainer>
-
-</NavigationContainer>
+    <NavigationContainer>
+      <MyStack></MyStack>
+    </NavigationContainer>
   );
 }
 
+// eslint-disable-next-line no-unused-vars
 const styles = StyleSheet.create({
   container: {
     flex: 1,
