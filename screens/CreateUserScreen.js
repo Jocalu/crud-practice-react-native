@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { useState } from 'react'
 import {View, Button, TextInput, ScrollView, StyleSheet} from 'react-native'
 import firebase from '../database/firebase'
 
-const CreateUserScreen = () => {
+const CreateUserScreen = (props) => {
   const [state, setState] = useState({
     name: '',
     email: '',
@@ -18,12 +19,16 @@ const CreateUserScreen = () => {
     if(state.name === ''){
       alert('Please provide a name')
     } else {
+      try {
       await firebase.db.collection('users').add({
         name: state.name,
         email: state.email,
         phone: state.phone,
       })
-      alert ('saved')
+      props.navigation.navigate('UserList')
+      } catch (error){
+        console.log(error)
+      }
     }
   }
 
