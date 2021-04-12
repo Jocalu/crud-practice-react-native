@@ -1,21 +1,28 @@
 /* eslint-disable react/prop-types */
 import React, {useEffect, useState} from 'react'
-import { Button } from 'react-native'
+import { ActivityIndicator, Button } from 'react-native'
 import {View, StyleSheet} from 'react-native'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import firebase from '../database/firebase'
 
 const UserDetailScreen = (props) => {
-    const [state, setState] = useState({
+    const [user, setUser] = useState({
+      id: '',
       name: '',
       email: '',
       phone: ''
   })
+  const [loading, setLoading] = useState(true)
 
   const getUserById = async(id) => {
     const dbRef = firebase.db.collection('users').doc(id)
     const doc = await dbRef.get()
     const user = doc.data()
+    setUser({
+      ...user,
+      id: doc.id, 
+    })
+    setLoading(false)
   }
 
   useEffect(()=>{
@@ -24,6 +31,14 @@ const UserDetailScreen = (props) => {
 
   const handleChangeText = (name, value) => {
     setState({...state, [name]: value})
+
+    if (loading){
+      return(
+        <View>
+            <ActivityIndicator size="large" color="#9e9e9e" />
+        </View>
+      )
+    }
   }
 
   return (
@@ -31,6 +46,7 @@ const UserDetailScreen = (props) => {
     <View style={styles.inputGroup}>
       <TextInput 
       placeholder="Name User" 
+      value={user.name}
       onChangeText={(value) => handleChangeText('name', value)}
       ></TextInput>
     </View>
@@ -38,6 +54,7 @@ const UserDetailScreen = (props) => {
     <View style={styles.inputGroup}>
       <TextInput 
       placeholder="Email User" 
+      value={user.email}
       onChangeText={(value) => handleChangeText('email', value)}
       ></TextInput>
     </View>
@@ -45,6 +62,7 @@ const UserDetailScreen = (props) => {
     <View style={styles.inputGroup}>
       <TextInput 
       placeholder="Phone User" 
+      value={user.phone}
       onChangeText={(value) => handleChangeText('phone', value)}
       ></TextInput>
     </View>
@@ -79,6 +97,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1
   }
 });
-
 
 export default UserDetailScreen
