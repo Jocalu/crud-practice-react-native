@@ -40,7 +40,7 @@ export default function UsersList(props) {
         >
           <ListItem.Chevron />
           <Avatar
-            source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }}
+            source={{ uri: 'https://lh3.googleusercontent.com/proxy/hzcIFTi6tu-A4hteXy2XI-5eDUNabwBIaz5tHmg8HY7ryyQZCH_9zYDKlU8dy1Godx-EuowKVwmlV_IDjzPpN4JuvvH9pfEr-P57iNlrXRSYXCNti3nHg7o' }}
             rounded
           />
           <ListItem.Content>
