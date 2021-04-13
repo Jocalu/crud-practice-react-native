@@ -7,7 +7,9 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-import { ScrollView, TextInput, TouchableHighlight } from 'react-native-gesture-handler';
+import {
+  ScrollView, TextInput, TouchableOpacity,
+} from 'react-native-gesture-handler';
 import firebase from '../../database/firebase';
 
 export default function UserDetailScreen(props) {
@@ -133,20 +135,20 @@ export default function UserDetailScreen(props) {
       </View>
 
       <View>
-        <TouchableHighlight
+        <TouchableOpacity
           style={styles.buttonUpdate}
           onPress={() => updateUser()}
         >
           <Text style={styles.textWhite}>Update User</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
       <View>
-        <TouchableHighlight
+        <TouchableOpacity
           style={styles.buttonDelete}
           onPress={() => openConfirmationAlert()}
         >
           <Text style={styles.textWhite}>Delete User</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
 
     </ScrollView>

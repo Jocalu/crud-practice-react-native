@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Text, StyleSheet } from 'react-native';
-import { ScrollView, TouchableHighlight } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { ListItem, Avatar } from 'react-native-elements';
 import firebase from '../../database/firebase';
 
@@ -29,6 +29,9 @@ export default function UsersList(props) {
       backgroundColor: '#2196f3',
       padding: 10,
       alignItems: 'center',
+      flex: 1,
+      marginHorizontal: 35,
+      marginTop: 15,
     },
     textWhite: {
       color: 'white',
@@ -41,7 +44,7 @@ export default function UsersList(props) {
   });
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
 
       {users.map((user) => (
         <ListItem
@@ -62,12 +65,12 @@ export default function UsersList(props) {
           </ListItem.Content>
         </ListItem>
       ))}
-      <TouchableHighlight
+      <TouchableOpacity
         style={styles.buttonCreate}
         onPress={() => props.navigation.navigate('CreateUserScreen')}
       >
         <Text style={styles.textWhite}>Create User</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </ScrollView>
   );
 }
