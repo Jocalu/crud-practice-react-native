@@ -112,14 +112,14 @@ export default function UserDetailScreen(props) {
 
       <View>
         <Button
-          color="#19AC52"
+          color="green"
           title="Update User"
           onPress={() => updateUser()}
         />
       </View>
       <View>
         <Button
-          color="#E37399"
+          color="red"
           title="Delete User"
           onPress={() => openConfirmationAlert()}
         />
