@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Text, StyleSheet } from 'react-native';
+import { ScrollView, TouchableHighlight } from 'react-native-gesture-handler';
 import { ListItem, Avatar } from 'react-native-elements';
 import firebase from '../../database/firebase';
 
@@ -24,12 +24,25 @@ export default function UsersList(props) {
     });
   }, []);
 
+  const styles = StyleSheet.create({
+    buttonCreate: {
+      backgroundColor: '#2196f3',
+      padding: 10,
+      alignItems: 'center',
+    },
+    textWhite: {
+      color: 'white',
+      fontSize: 20,
+    },
+    textBlack: {
+      color: 'black',
+      fontSize: 20,
+    },
+  });
+
   return (
     <ScrollView>
-      <Button
-        title="Create User"
-        onPress={() => props.navigation.navigate('CreateUserScreen')}
-      />
+
       {users.map((user) => (
         <ListItem
           key={user.id}
@@ -44,11 +57,17 @@ export default function UsersList(props) {
             rounded
           />
           <ListItem.Content>
-            <ListItem.Title>{user.name}</ListItem.Title>
+            <ListItem.Title style={styles.textBlack}>{user.name}</ListItem.Title>
             <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
           </ListItem.Content>
         </ListItem>
       ))}
+      <TouchableHighlight
+        style={styles.buttonCreate}
+        onPress={() => props.navigation.navigate('CreateUserScreen')}
+      >
+        <Text style={styles.textWhite}>Create User</Text>
+      </TouchableHighlight>
     </ScrollView>
   );
 }

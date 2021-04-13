@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   View,
-  Button,
   TextInput,
   ScrollView,
   Alert,
   StyleSheet,
+  Text,
 } from 'react-native';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 import firebase from '../../database/firebase';
 
 export default function CreateUserScreen(props) {
@@ -21,6 +22,19 @@ export default function CreateUserScreen(props) {
     container: {
       flex: 1,
       padding: 35,
+    },
+    buttonSave: {
+      backgroundColor: '#2196f3',
+      padding: 10,
+      alignItems: 'center',
+    },
+    textWhite: {
+      color: 'white',
+      fontSize: 20,
+    },
+    textBlack: {
+      color: 'black',
+      fontSize: 20,
     },
     inputGroup: {
       flex: 1,
@@ -56,6 +70,7 @@ export default function CreateUserScreen(props) {
     <ScrollView style={styles.container}>
       <View style={styles.inputGroup}>
         <TextInput
+          style={styles.textBlack}
           placeholder="Name User"
           onChangeText={(value) => handleChangeText('name', value)}
         />
@@ -63,6 +78,7 @@ export default function CreateUserScreen(props) {
 
       <View style={styles.inputGroup}>
         <TextInput
+          style={styles.textBlack}
           placeholder="Email User"
           onChangeText={(value) => handleChangeText('email', value)}
         />
@@ -70,13 +86,19 @@ export default function CreateUserScreen(props) {
 
       <View style={styles.inputGroup}>
         <TextInput
+          style={styles.textBlack}
           placeholder="Phone User"
           onChangeText={(value) => handleChangeText('phone', value)}
         />
       </View>
 
       <View>
-        <Button title="Save User" onPress={() => saveNewUser()} />
+        <TouchableHighlight
+          style={styles.buttonSave}
+          onPress={() => saveNewUser()}
+        >
+          <Text style={styles.textWhite}>Save User</Text>
+        </TouchableHighlight>
       </View>
 
     </ScrollView>

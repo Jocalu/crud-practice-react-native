@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   ActivityIndicator,
-  Button,
   View,
   Alert,
   StyleSheet,
+  Text,
 } from 'react-native';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { ScrollView, TextInput, TouchableHighlight } from 'react-native-gesture-handler';
 import firebase from '../../database/firebase';
 
 export default function UserDetailScreen(props) {
@@ -15,6 +15,25 @@ export default function UserDetailScreen(props) {
     container: {
       flex: 1,
       padding: 35,
+    },
+    buttonDelete: {
+      backgroundColor: '#f2323f',
+      padding: 10,
+      alignItems: 'center',
+    },
+    buttonUpdate: {
+      backgroundColor: '#1bb54e',
+      padding: 10,
+      alignItems: 'center',
+      marginBottom: 10,
+    },
+    textWhite: {
+      color: 'white',
+      fontSize: 20,
+    },
+    textBlack: {
+      color: 'black',
+      fontSize: 20,
     },
     inputGroup: {
       flex: 1,
@@ -46,14 +65,6 @@ export default function UserDetailScreen(props) {
     setLoading(false);
   };
 
-  useEffect(() => {
-    getUserById(props.route.params.userId);
-  }, []);
-
-  const handleChangeText = (name, value) => {
-    setUser({ ...user, [name]: value });
-  };
-
   const deleteUser = async () => {
     const dbRef = firebase.db.collection('users').doc(props.route.params.userId);
     await dbRef.delete();
@@ -69,6 +80,14 @@ export default function UserDetailScreen(props) {
     });
     setUser(initialState);
     props.navigation.navigate('UsersList');
+  };
+
+  useEffect(() => {
+    getUserById(props.route.params.userId);
+  }, []);
+
+  const handleChangeText = (name, value) => {
+    setUser({ ...user, [name]: value });
   };
 
   const openConfirmationAlert = () => {
@@ -88,6 +107,7 @@ export default function UserDetailScreen(props) {
     <ScrollView style={styles.container}>
       <View style={styles.inputGroup}>
         <TextInput
+          style={styles.textBlack}
           placeholder="Name User"
           value={user.name}
           onChangeText={(value) => handleChangeText('name', value)}
@@ -96,6 +116,7 @@ export default function UserDetailScreen(props) {
 
       <View style={styles.inputGroup}>
         <TextInput
+          style={styles.textBlack}
           placeholder="Email User"
           value={user.email}
           onChangeText={(value) => handleChangeText('email', value)}
@@ -104,6 +125,7 @@ export default function UserDetailScreen(props) {
 
       <View style={styles.inputGroup}>
         <TextInput
+          style={styles.textBlack}
           placeholder="Phone User"
           value={user.phone}
           onChangeText={(value) => handleChangeText('phone', value)}
@@ -111,18 +133,20 @@ export default function UserDetailScreen(props) {
       </View>
 
       <View>
-        <Button
-          color="green"
-          title="Update User"
+        <TouchableHighlight
+          style={styles.buttonUpdate}
           onPress={() => updateUser()}
-        />
+        >
+          <Text style={styles.textWhite}>Update User</Text>
+        </TouchableHighlight>
       </View>
       <View>
-        <Button
-          color="red"
-          title="Delete User"
+        <TouchableHighlight
+          style={styles.buttonDelete}
           onPress={() => openConfirmationAlert()}
-        />
+        >
+          <Text style={styles.textWhite}>Delete User</Text>
+        </TouchableHighlight>
       </View>
 
     </ScrollView>
